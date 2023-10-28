@@ -2,7 +2,7 @@ from flask import Flask, request, render_template
 import openai
 
 app = Flask(__name__)
-openai.api_key = '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'
+openai.api_key = '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'
 
 # Global variable to store conversation - not recommended for production
 conversation = []
@@ -27,9 +27,16 @@ def get_response():
         ]
     )
 
+
     ai_response = response.choices[0].message['content']
     conversation.append(f"Mark Bot: {ai_response}")  # Add AI response to conversation
 
+    return render_template('index.html', conversation=conversation)
+
+@app.route('/clear_conversation', methods=['POST'])
+def clear_conversation():
+    global conversation
+    conversation = []  # Reset conversation
     return render_template('index.html', conversation=conversation)
 
 if __name__ == '__main__':
