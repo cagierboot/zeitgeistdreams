@@ -2,7 +2,7 @@
 import requests
 import json
 
-api_key = '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'  # Replace with your new API key
+api_key = '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'  # Replace with your new API key
 headers = {
     "Content-Type": "application/json",
     "Authorization": f"Bearer {api_key}"
