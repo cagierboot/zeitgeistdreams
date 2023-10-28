@@ -2,6 +2,7 @@ import json
 
 data = [
     {"prompt": "User: What was popular on Oct 27th?\nAI:", "completion": " A cat eyed a fish swimming in a bowl, its tail twitching with interest.\n"},
+    
     {"prompt": "User: What was popular on Oct 28th?\nAI:", "completion": " In the garden, a cat chased after a fish-shaped wind chime, pawing at it playfully.\n"},
     {"prompt": "User: What was popular on Oct 29th?\nAI:", "completion": " A cat sat beside a pond, mesmerized by the fish darting below the surface.\n"},
     {"prompt": "User: What was popular on Oct 30th?\nAI:", "completion": " A kitten dreamt of swimming alongside the fish, paddling its tiny paws in its sleep.\n"},
@@ -22,21 +23,25 @@ data = [
     {"prompt": "User: What was popular on Nov 14th?\nAI:", "completion": " In the city park, a cat ambushed a small toy fish, tossed by a child playing nearby.\n"},
     {"prompt": "User: What was popular on Nov 15th?\nAI:", "completion": " A cat intently watched a fish swimming against the current in a stream, paw raised and ready to pounce.\n"}
 ]
-
-# Initialize a list to store the chat format data
 chat_data = []
 
-# Loop through each data entry
 for entry in data:
-    # Create a new conversation entry for each day
-    conversation_entry = entry["prompt"] + entry["completion"]
+    user_query = entry["prompt"].split("\nAI:")[0].strip()  # Extracting the user query
+    ai_response = entry["completion"].strip()  # Extracting the AI response
+    
+    # Construct a conversation in the required format
+    conversation_entry = {
+        "messages": [
+            {"role": "user", "content": user_query},
+            {"role": "assistant", "content": ai_response}
+        ]
+    }
 
     # Add this conversation to chat_data
-    chat_data.append({"prompt": conversation_entry})
+    chat_data.append(conversation_entry)
 
-
-# Write each prompt/completion pair to the JSONL file
-with open('training_data.jsonl', 'w') as file:
-    for entry in data:
+# Write each chat conversation to the JSONL file
+with open('chat_data.jsonl', 'w') as file:
+    for entry in chat_data:
         json.dump(entry, file)
         file.write('\n')
