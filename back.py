@@ -1,21 +1,24 @@
 from flask import Flask, request, render_template
 import openai
 
-import os
-print(os.path.abspath("templates"))
-
-
 app = Flask(__name__)
+openai.api_key = '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'
 
-openai.api_key = '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'
+# Global variable to store conversation - not recommended for production
+conversation = []
 
 @app.route('/')
 def index():
+    global conversation
+    conversation = []  # Reset conversation for new session
     return render_template('index.html')
 
 @app.route('/get_response', methods=['POST'])
 def get_response():
+    global conversation
     user_input = request.form['user_input']
+    conversation.append(f"You: {user_input}")  # Add user input to conversation
+
     response = openai.ChatCompletion.create(
         model="ft:gpt-3.5-turbo-0613:markortega::8EaZbTou",
         messages=[
@@ -23,7 +26,11 @@ def get_response():
             {"role": "user", "content": user_input}
         ]
     )
-    return response.choices[0].message['content']
+
+    ai_response = response.choices[0].message['content']
+    conversation.append(f"Mark Bot: {ai_response}")  # Add AI response to conversation
+
+    return render_template('index.html', conversation=conversation)
 
 if __name__ == '__main__':
     app.run(debug=True)

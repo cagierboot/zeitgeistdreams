@@ -10,6 +10,11 @@
         <input type="text" id="user_input" name="user_input">
         <input type="submit" value="Send">
     </form>
-    <p>Response: {{ response|default('') }}</p>
+    <h2>Conversation:</h2>
+    {% if conversation %}
+        {% for message in conversation %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
 </body>
 </html>
