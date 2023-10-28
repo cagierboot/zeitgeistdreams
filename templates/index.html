@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat with AI</title>
+</head>
+<body>
+    <form action="/get_response" method="post">
+        <label for="user_input">Your Message:</label>
+        <input type="text" id="user_input" name="user_input">
+        <input type="submit" value="Send">
+    </form>
+    <p>Response: {{ response|default('') }}</p>
+</body>
+</html>
