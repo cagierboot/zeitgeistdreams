@@ -1,24 +1,27 @@
+
 import requests
 import json
 
-api_key = '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'
+api_key = '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'  # Replace with your new API key
 headers = {
     "Content-Type": "application/json",
     "Authorization": f"Bearer {api_key}"
 }
 
 data = {
-    "training_file": "file-7as4vinolHytMlr7Fx5xkdDh",
-    "model": "gpt-3.5-turbo-0613"
+    "training_file": "file-NB15C4DcKqHutDYXcpFjkj00",
+    "model": "gpt-3.5-turbo"  # Modify this as per the model you are using
 }
 
-response = requests.post(
-    "https://api.openai.com/v1/fine_tuning/jobs",
-    headers=headers,
-    data=json.dumps(data)
-)
-
-if response.status_code == 200:
+try:
+    response = requests.post(
+        "https://api.openai.com/v1/fine_tuning/jobs",
+        headers=headers,
+        data=json.dumps(data)
+    )
+    response.raise_for_status()  # This will raise an error for 4xx/5xx responses
     print("Success:", response.json())
-else:
-    print("Failed:", response.text)
+except requests.exceptions.HTTPError as err:
+    print("HTTP error occurred:", err)
+except Exception as err:
+    print("An error occurred:", err)

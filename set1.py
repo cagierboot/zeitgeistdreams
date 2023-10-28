@@ -25,13 +25,17 @@ data = [
 ]
 chat_data = []
 
+# Adding a system message to set the context
+system_message = "This assistant shares charming tales about the interactions between cats and fish."
+
 for entry in data:
     user_query = entry["prompt"].split("\nAI:")[0].strip()  # Extracting the user query
     ai_response = entry["completion"].strip()  # Extracting the AI response
-    
+
     # Construct a conversation in the required format
     conversation_entry = {
         "messages": [
+            {"role": "system", "content": system_message},
             {"role": "user", "content": user_query},
             {"role": "assistant", "content": ai_response}
         ]
