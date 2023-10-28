@@ -7,7 +7,7 @@ print(os.path.abspath("templates"))
 
 app = Flask(__name__)
 
-openai.api_key = 'YOUR_API_KEY_HERE'
+openai.api_key = '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'
 
 @app.route('/')
 def index():
