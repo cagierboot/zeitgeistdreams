@@ -21,16 +21,19 @@
         }
 
         .main-content {
-            display: flex;
-            align-items: start;
-            justify-content: space-between;
-            width: 100%;
-        }
+    display: flex;
+    align-items: stretch; /* changed from start to stretch */
+    justify-content: space-between;
+    flex-grow: 1; /* added to make sure it takes up available space */
+    width: 100%;
+    height: 100%; /* ensure full height */
+}
+
 
         #chat-container {
-            flex-grow: 0;
+            flex-grow: 1;
             flex-shrink: 0;
-            flex-basis: 52%;
+            flex-basis: 50%;
             overflow-y: auto;
             background-color: #fff;
             border: 2px solid #ddd;
@@ -40,13 +43,13 @@
         }
 
         #top-right-image {
-            flex-grow: 1;
-            flex-shrink: 1;
-            max-width: 310px;
-            height: auto;
-            align-self: center;
-            margin: 0 auto;
-        }
+        width: auto;  /* Maintain the aspect ratio */
+        height: 52vh; /* 30% of the viewport height */
+        align-self: center;
+        margin: -325px 10px 0 10px; /* Top, Right, Bottom, Left */
+    }
+
+
 
         .chat-message {
             padding: 5px;
@@ -63,54 +66,83 @@
             background-color: #fce4ec;
             text-align: left;
         }
+/* Styles for Input Wrapper */
+.input-wrapper {
+    position: relative;
+    margin-bottom: 10px;
+    width: 100%; /* Full width */
+    border: 1px solid black;
+}
 
-        #user-input {
-            width: 52%;
-            margin-left: 10px;
-            float: left;
-            box-sizing: border-box;
-            border: 2px solid black;
-        }
+#user-input {
+    width: calc(100% - 85px); /* Assuming the send button is 90px */
+    box-sizing: border-box;
+    
+    padding: 10px;
+    height: 40px; /* You might want to adjust the height */
+    
+}
 
-        #send-button, #clear-button {
-            width: 100px;
-            padding: 10px;
-            box-sizing: border-box;
-            float: right;
-        }
+#send-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 85px;
+    padding-left: 3px;
+    /* Round corners only top right and bottom right */
+}
 
+
+        /* Styles for Restart Button */
+        #clear-button {
+            position: absolute;
+    right: 10px; /* Adjust as needed */
+    bottom: 71px; /* Increase value to move the button upwards */
+    height: auto; /* Adjust height as needed */
+    z-index: 10;
+    padding: 5px 20px;
+}
+
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    #clear-button {
+        width: 15vw; /* Increase width for smaller screens if needed */
+        bottom: 10px;
+    }
+}
+
+
+        /* Clearfix */
         .clearfix {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
             background-color: #f4f4f4;
             padding: 10px 20px;
             box-sizing: border-box;
-            flex-shrink: 0;
+            z-index: 10;
         }
-
         .clearfix::after {
             content: "";
             clear: both;
             display: table;
         }
 
-        form {
-            margin: 0;
-        }
-
+        /* Media Queries */
         @media (max-width: 768px) {
             .main-content {
                 flex-direction: column;
             }
-
             #chat-container, #top-right-image {
                 flex-basis: auto;
                 width: 100%;
                 max-width: none;
             }
-
             #user-input {
-                width: 100%;
-                float: none;
-                margin: 0 auto;
+                width: calc(100% - 100px); /* Adjusted width for mobile screens */
             }
         }
     </style>
@@ -123,14 +155,15 @@
         </div>
         <img src="https://i.pinimg.com/564x/bc/9b/bc/bc9bbc8167d4e4fefa2acd13241575fd.jpg" id="top-right-image" alt="Descriptive Image Text">
     </div>
-    <div class="clearfix">
+    <<div class="clearfix">
         <form action="/get_response" method="post" style="margin: 0;">
-            <input type="text" name="user_input" id="user-input" autocomplete="off" placeholder="Type your message...">
-            <button type="submit" id="send-button">Send</button>
-        </form>
-        <form action="/clear_conversation" method="post" style="margin: 0;">
+            <div class="input-wrapper">
+                <input type="text" name="user_input" id="user-input" autocomplete="off" placeholder="Type your message...">
+                <button type="submit" id="send-button">Send</button>
+            </div>
             <button type="submit" id="clear-button">Restart</button>
         </form>
     </div>
+    
 </body>
 </html>
