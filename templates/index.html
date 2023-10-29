@@ -172,9 +172,8 @@
     <script>
         document.addEventListener("DOMContentLoaded", function(){
             document.getElementById("more-info-button").addEventListener("click", function(){
-                // Assuming you want to send some specific data; modify as needed
                 var data = { user_input: 'Special request data or some input' };
-
+    
                 fetch('/special_query', {
                     method: 'POST',
                     headers: {
@@ -182,10 +181,11 @@
                     },
                     body: JSON.stringify(data),
                 })
-                .then(response => response.text())
+                .then(response => response.json()) // Parse JSON response
                 .then(data => {
                     console.log('Success:', data);
-                    // Handle success - e.g., update the conversation in the chat container
+                    // Update the #image-text-container with the special response
+                    document.getElementById('image-text-container').innerHTML = '<p>' + data.response + '</p>';
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -193,6 +193,7 @@
             });
         });
     </script>
+    
 </head>
 <body>
     <h1>Zeitgeist Trends Analysis</h1>
