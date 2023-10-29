@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import openai
 
 app = Flask(__name__)
-openai.api_key = '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'
+openai.api_key = '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'
 
 # Global variable to store conversation - not recommended for production
 conversation = []
@@ -20,7 +20,7 @@ def get_response():
     conversation.append(f"You: {user_input}")
 
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are an assistant with a deep knowledge of what questions people are asking these days. Your dreams are always inspired by these facts about what people are asking"},
             {"role": "user", "content": user_input}
@@ -44,7 +44,7 @@ def special_query():
     conversation.append(f"You (special): {user_input}")
 
     special_response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "Please generate three distinct and succinct bullet points analyzing poetry"},
             {"role": "user", "content": user_input}
