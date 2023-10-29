@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import openai
 
 app = Flask(__name__)
-openai.api_key = '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'
+openai.api_key = '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'
 
 # Global variable to store conversation - not recommended for production
 conversation = []
@@ -17,23 +17,27 @@ def index():
 def get_response():
     global conversation
     user_input = request.form['user_input']
-    conversation.append(f"You: {user_input}")
 
+    # Append user's message to the conversation
+    conversation.append({"role": "user", "content": user_input})
+
+    # Create a response using the updated conversation
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You are an assistant with a deep knowledge of what questions people are asking these days. Your dreams are always inspired by these facts about what people are asking"},
-            {"role": "user", "content": user_input}
-        ]
+        messages=conversation
     )
 
     ai_response = response.choices[0].message['content']
+    conversation.append({"role": "assistant", "content": ai_response})
 
     print(f"AI Response: {ai_response}")  # Print AI response in terminal
-
-    # Instead of rendering a template, return the response as a simple text
     return ai_response
 
+@app.route('/clear_conversation', methods=['POST'])
+def clear_conversation():
+    global conversation
+    conversation = []  # Clear the conversation history
+    return "Conversation cleared"
 
 
 @app.route('/special_query', methods=['POST'])
@@ -59,11 +63,7 @@ def special_query():
     # Instead of rendering a template, return a JSON response
     return jsonify({"message": "Special query processed", "response": ai_response})
 
-@app.route('/clear_conversation', methods=['POST'])
-def clear_conversation():
-    global conversation
-    conversation = []  # Reset conversation
-    return render_template('index.html', conversation=conversation)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
