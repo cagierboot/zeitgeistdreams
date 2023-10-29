@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeitgeist Trends Analysis</title>
+    <title>Zeitgeist  Analysis</title>
     <style>
         html, body {
             height: 100%;
@@ -185,7 +185,8 @@
                 .then(data => {
                     console.log('Success:', data);
                     // Update the #image-text-container with the special response
-                    document.getElementById('image-text-container').innerHTML = '<p>' + data.response + '</p>';
+                    document.getElementById('image-text-container').innerHTML += '<p>' + data.response + '</p>';
+
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -196,7 +197,7 @@
     
 </head>
 <body>
-    <h1>Zeitgeist Trends Analysis</h1>
+    <h1>Zeitgeist Analysis</h1>
     <div class="main-content">
         <div id="chat-container">
             <!-- Chat messages will be loaded here -->
