@@ -30,18 +30,23 @@
 }
 
 
-        #chat-container {
-            flex-grow: 1;
-            flex-shrink: 0;
-            flex-basis: 50%;
-            overflow-y: auto;
-            background-color: #fff;
-            border: 2px solid #ddd;
-            padding: 20px;
-            margin-left: 10px;
-            border-radius: 2%;
-            margin-bottom: 30px;
-        }
+#chat-container {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 50%;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    padding: 20px;
+    margin-left: 10px;
+    border-radius: 2%;
+    height: 86%; /* Change this to auto to allow the container to grow with content */
+    max-height: 100%; /* Optional: Ensure it doesn't grow beyond its parent */
+    margin-top: 0; /* Align to the top */
+    margin-bottom: auto; /* Remain at the top as it grows */
+}
+
+
 
         #top-right-image {
         width: auto;  /* Maintain the aspect ratio */
