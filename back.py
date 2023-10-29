@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import openai
 
 app = Flask(__name__)
-openai.api_key = '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'
+openai.api_key = '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'
 
 # Global variable to store conversation - not recommended for production
 conversation = []
@@ -17,7 +17,7 @@ def index():
 def get_response():
     global conversation
     user_input = request.form['user_input']
-    conversation.append(f"You: {user_input}")  # Add user input to conversation
+    conversation.append(f"You: {user_input}")
 
     response = openai.ChatCompletion.create(
         model="ft:gpt-3.5-turbo-0613:markortega::8EvlX0TG",
@@ -28,9 +28,14 @@ def get_response():
     )
 
     ai_response = response.choices[0].message['content']
-    conversation.append(f"Arachne: {ai_response}")  # Add AI response to conversation
+    conversation.append(f"Arachne: {ai_response}")
+
+    print(f"AI Response: {ai_response}")  # Print AI response in terminal
+    
 
     return render_template('index.html', conversation=conversation)
+
+
 
 @app.route('/special_query', methods=['POST'])
 def special_query():

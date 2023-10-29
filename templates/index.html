@@ -204,14 +204,13 @@
         <div>
             <img src="https://i.pinimg.com/564x/bc/9b/bc/bc9bbc8167d4e4fefa2acd13241575fd.jpg" id="top-right-image" alt="Descriptive Image Text">
             <div id="image-text-container">
-                
+                <!-- Other content -->
                 <button type="button" id="more-info-button">generate</button>
             </div>
-            
         </div>
     </div>
     <div class="clearfix">
-        <form action="/get_response" method="post" style="margin: 0;">
+        <form id="chat-form">
             <div class="input-wrapper">
                 <input type="text" name="user_input" id="user-input" autocomplete="off" placeholder="Type your message...">
                 <button type="button" id="clear-button">Restart</button>
@@ -219,5 +218,43 @@
             </div>
         </form>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const chatForm = document.getElementById("chat-form");
+            const userInputField = document.getElementById("user-input");
+            const chatContainer = document.getElementById("chat-container");
+
+            chatForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+                let user_input = userInputField.value;
+                displayMessage(user_input, "user-message");
+
+                fetch('/get_response', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'user_input=' + encodeURIComponent(user_input),
+                })
+                .then(response => response.text())
+                .then(ai_response => {
+                    displayMessage(ai_response, "bot-message");
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
+                userInputField.value = "";
+            });
+
+            function displayMessage(message, className) {
+                const messageDiv = document.createElement("div");
+                messageDiv.classList.add("chat-message", className);
+                messageDiv.textContent = message;
+                chatContainer.appendChild(messageDiv);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+        });
+    </script>
 </body>
 </html>
