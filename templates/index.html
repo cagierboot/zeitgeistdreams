@@ -13,6 +13,16 @@
             flex-direction: column;
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
+            position: relative; /* Added for absolute positioning of the image */
+        }
+
+        #top-right-image {
+            position: absolute;
+            top: 80px; /* Adjust as needed */
+            right: 5%; /* Adjust as needed */
+            width: 310px; /* Adjust as per your requirement */
+            height: 310px;
+            border: 0;
         }
 
         h1 {
@@ -22,11 +32,16 @@
 
         #chat-container {
             flex-grow: 1;
+            width: 50%;
             overflow-y: auto;
             background-color: #fff;
             border: 1px solid #ddd;
             padding: 20px;
-            margin-bottom: 0; /* Removed margin */
+            margin-bottom: 0;
+        }
+
+        .right-content {
+            width: 50%;
         }
 
         .chat-message {
@@ -73,11 +88,12 @@
         }
 
         form {
-            margin: 0; /* Remove margin */
+            margin: 0;
         }
     </style>
 </head>
 <body>
+    <img src="https://i.pinimg.com/564x/bc/9b/bc/bc9bbc8167d4e4fefa2acd13241575fd.jpg" id="top-right-image" alt="Descriptive Image Text">
     <h1>Trends Bot</h1>
     <div id="chat-container">
         {% for line in conversation %}
@@ -95,7 +111,5 @@
             <button type="submit" id="clear-button">Restart</button>
         </form>
     </div>
-
-    
 </body>
 </html>
