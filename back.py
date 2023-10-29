@@ -28,12 +28,11 @@ def get_response():
     )
 
     ai_response = response.choices[0].message['content']
-    conversation.append(f"Arachne: {ai_response}")
 
     print(f"AI Response: {ai_response}")  # Print AI response in terminal
-    
 
-    return render_template('index.html', conversation=conversation)
+    # Instead of rendering a template, return the response as a simple text
+    return ai_response
 
 
 
