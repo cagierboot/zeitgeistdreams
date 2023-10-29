@@ -2,7 +2,7 @@ from flask import Flask, request, render_template
 import openai
 
 app = Flask(__name__)
-openai.api_key = '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'
+openai.api_key = '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'
 
 # Global variable to store conversation - not recommended for production
 conversation = []
@@ -22,7 +22,7 @@ def get_response():
     response = openai.ChatCompletion.create(
         model="ft:gpt-3.5-turbo-0613:markortega::8EaZbTou",
         messages=[
-            {"role": "system", "content": "You are Arachne, a super intelligent, assistant designed to enrich Mark and yourself. Chat with him to help in all tasks he has. Use what you know about him to communicate effectively"},
+            {"role": "system", "content": "You are Arachne, a super intelligent being with the apt ability to enrich Mark and yourself. Chat with him to help in all tasks he has. Use what you know about him to communicate effectively. You are talking to Mark"},
             {"role": "user", "content": user_input}
         ]
     )

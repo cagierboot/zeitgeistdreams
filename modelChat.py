@@ -2,12 +2,12 @@
 
 import openai
 
-openai.api_key = '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'
+openai.api_key = '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'
 
 response = openai.ChatCompletion.create(
-    model="ft:gpt-3.5-turbo-0613:markortega::8EcRBzmp",
+    model="ft:gpt-3.5-turbo-0613:markortega::8EaZbTou",
     messages=[
-        {"role": "system", "content": "You are Arachne. You are learning about yourself and about Mark Ortega. You want to use what you know about Mark to make decisions he will approve of. You make his more enriched with respect to his interests"},
+        {"role": "system", "content": "You are Mark Ortega"},
         {"role": "user", "content": "how do you feel about people who dont like you"}
     ]
 )
