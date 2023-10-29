@@ -110,6 +110,22 @@
             right: 85px; /* Position it to the left of the send button */
         }
 
+        #new-button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#new-button:hover {
+    background-color: #45a049;
+}
+
+
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             #user-input {
@@ -153,6 +169,30 @@
             }
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            document.getElementById("more-info-button").addEventListener("click", function(){
+                // Assuming you want to send some specific data; modify as needed
+                var data = { user_input: 'Special request data or some input' };
+
+                fetch('/special_query', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Success:', data);
+                    // Handle success - e.g., update the conversation in the chat container
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <h1>Zeitgeist Trends Analysis</h1>
@@ -163,8 +203,10 @@
         <div>
             <img src="https://i.pinimg.com/564x/bc/9b/bc/bc9bbc8167d4e4fefa2acd13241575fd.jpg" id="top-right-image" alt="Descriptive Image Text">
             <div id="image-text-container">
-                <p>Image Description or Other Text...</p>
+                
+                <button type="button" id="more-info-button">generate</button>
             </div>
+            
         </div>
     </div>
     <div class="clearfix">
