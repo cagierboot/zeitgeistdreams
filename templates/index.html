@@ -77,52 +77,43 @@
             background-color: #fce4ec;
             text-align: left;
         }
-/* Styles for Input Wrapper */
-.input-wrapper {
-    position: relative;
-    margin-bottom: 10px;
-    width: 100%; /* Full width */
-    border: 1px solid black;
-}
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 10px;
+            width: 100%; /* Full width */
+        }
 
-#user-input {
-    width: calc(100% - 85px); /* Assuming the send button is 90px */
-    box-sizing: border-box;
-    
-    padding: 10px;
-    height: 40px; /* You might want to adjust the height */
-    
-}
+        #user-input {
+            width: calc(100% - 170px); /* Adjusted to accommodate restart and send buttons */
+            box-sizing: border-box;
+            padding: 10px;
+            height: 40px;
+        }
 
-#send-button {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    width: 85px;
-    padding-left: 3px;
-    /* Round corners only top right and bottom right */
-}
-
-
-        /* Styles for Restart Button */
-        #clear-button {
+        #send-button, #clear-button {
             position: absolute;
-    right: 10px; /* Adjust as needed */
-    bottom: 71px; /* Increase value to move the button upwards */
-    height: auto; /* Adjust height as needed */
-    z-index: 10;
-    padding: 5px 20px;
-}
+            top: 0;
+            height: 100%;
+            width: 85px; /* Assuming equal width for both buttons */
+        }
 
+        #send-button {
+            right: 0;
+        }
 
-/* Adjustments for smaller screens */
-@media (max-width: 768px) {
-    #clear-button {
-        width: 15vw; /* Increase width for smaller screens if needed */
-        bottom: 10px;
-    }
-}
+        #clear-button {
+            right: 85px; /* Position it to the left of the send button */
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            #user-input {
+                width: calc(100% - 170px); /* Adjusted width for mobile screens */
+            }
+            #send-button, #clear-button {
+                width: 85px; /* Adjust if needed */
+            }
+        }
 
 
         /* Clearfix */
@@ -171,15 +162,14 @@
             </div>
         </div>
     </div>
-    <<div class="clearfix">
+    <div class="clearfix">
         <form action="/get_response" method="post" style="margin: 0;">
             <div class="input-wrapper">
                 <input type="text" name="user_input" id="user-input" autocomplete="off" placeholder="Type your message...">
+                <button type="button" id="clear-button">Restart</button>
                 <button type="submit" id="send-button">Send</button>
             </div>
-            <button type="submit" id="clear-button">Restart</button>
         </form>
     </div>
-    
 </body>
 </html>
