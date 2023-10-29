@@ -1,8 +1,8 @@
 import requests
 import json
 
-api_key = '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'  # Replace with your actual API key
-job_id = 'ftjob-ykBH3mIOUE5WU3S90zC0qexB'  # Replace with your actual job ID
+api_key = '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'  # Replace with your actual API key
+job_id = 'ftjob-Kf1I6VHR3WwdSfZpcIlqbBP1'  # Replace with your actual job ID
 
 headers = {
     "Authorization": f"Bearer {api_key}"

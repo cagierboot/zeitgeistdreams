@@ -2,8 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import openai
 
 app = Flask(__name__)
-openai.api_key = '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'
-
+openai.api_key = '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'
 # Global variable to store conversation - not recommended for production
 conversation = []
 
@@ -18,12 +17,16 @@ def get_response():
     global conversation
     user_input = request.form['user_input']
 
+    # Insert a system message into the conversation
+    system_message = "You are an AI bot that is trained on world news current events and can perform analyses on the data you are trained on."
+    conversation.append({"role": "system", "content": system_message})
+
     # Append user's message to the conversation
     conversation.append({"role": "user", "content": user_input})
 
     # Create a response using the updated conversation
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="ft:gpt-3.5-turbo-0613:markortega::8F12pY3C",
         messages=conversation
     )
 
@@ -45,18 +48,19 @@ def special_query():
     global conversation
     data = request.get_json()
     user_input = data['user_input']
-    conversation.append(f"You (special): {user_input}")
+    conversation.append({"role": "user", "content": f"{user_input}"})
+
 
     special_response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="ft:gpt-3.5-turbo-0613:markortega::8F12pY3C",
         messages=[
-            {"role": "system", "content": "Please generate three distinct and succinct bullet points analyzing poetry"},
+            {"role": "system", "content": "Please generate one observation based on a topic recurring in current events"},
             {"role": "user", "content": user_input}
         ]
     )
 
     ai_response = special_response.choices[0].message['content']
-    conversation.append(f"Arachne (Special): {ai_response}")
+    
 
     print(f"Special Query Response: {ai_response}")
     

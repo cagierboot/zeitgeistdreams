@@ -11,7 +11,7 @@ user_agent = 'app:v1.0 cagierboot)'
 reddit = praw.Reddit(client_id=client_id, client_secret=client_secret, user_agent=user_agent)
 
 # Subreddits to fetch data from
-subreddits = ["PhilosophyofScience"]
+subreddits = ["worldnews"]
 
 # Store all posts from different categories
 all_posts_data = []
@@ -23,9 +23,9 @@ for subreddit_name in subreddits:
         created_date = datetime.utcfromtimestamp(post.created_utc).strftime('%B %d, %Y')
 
         post_info = {
-            'prompt': f"This was trending on {created_date}:",
+            'prompt': f"This was the headline for {created_date}:",
             'completion': f"\n{post.title}\n",
-            'system_message': "You are an assistant with a deep knowledge of what questions people are asking these days. This influences what you dream about in indirect and direct ways "
+            'system_message': "You are an AI bot that is trained on world news current events and can perform analyses on this data you are training on."
         }
         all_posts_data.append(post_info)
 
@@ -33,4 +33,4 @@ for subreddit_name in subreddits:
 with open('top_posts.json1', 'w', encoding='utf-8') as f:
     json.dump(all_posts_data, f, ensure_ascii=False, indent=4)
 
-print("Top posts have been saved to 'top_posts.json'")
+print("Top posts have been saved to 'top_posts.json1'")
