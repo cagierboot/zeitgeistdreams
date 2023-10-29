@@ -171,28 +171,28 @@
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function(){
-            document.getElementById("more-info-button").addEventListener("click", function(){
-                var data = { user_input: 'Special request data or some input' };
-    
-                fetch('/special_query', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                })
-                .then(response => response.json()) // Parse JSON response
-                .then(data => {
-                    console.log('Success:', data);
-                    // Update the #image-text-container with the special response
-                    document.getElementById('image-text-container').innerHTML += '<p>' + data.response + '</p>';
+    document.getElementById("more-info-button").addEventListener("click", function(){
+        var data = { user_input: 'Special request data or some input' };
 
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-            });
+        fetch('/special_query', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Update only the response area, not the entire container
+            document.getElementById('response-area').innerHTML = '<p>' + data.response + '</p>';
+        })
+        .catch((error) => {
+            console.error('Error:', error);
         });
+    });
+});
+
     </script>
     
 </head>
@@ -205,7 +205,7 @@
         <div>
             <img src="https://i.pinimg.com/564x/bc/9b/bc/bc9bbc8167d4e4fefa2acd13241575fd.jpg" id="top-right-image" alt="Descriptive Image Text">
             <div id="image-text-container">
-                <!-- Other content -->
+                <div id="response-area"></div> <!-- New div for showing responses -->
                 <button type="button" id="more-info-button">generate</button>
             </div>
         </div>

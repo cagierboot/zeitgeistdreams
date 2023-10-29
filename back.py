@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import openai
 
 app = Flask(__name__)
-openai.api_key = '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'
+openai.api_key = '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'
 
 # Global variable to store conversation - not recommended for production
 conversation = []
