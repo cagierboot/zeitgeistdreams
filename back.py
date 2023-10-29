@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import openai
 
 app = Flask(__name__)
-openai.api_key = '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'
+openai.api_key = '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'
 # Global variable to store conversation - not recommended for production
 conversation = []
 
@@ -26,7 +26,7 @@ def get_response():
 
     # Create a response using the updated conversation
     response = openai.ChatCompletion.create(
-        model="ft:gpt-3.5-turbo-0613:markortega::8F12pY3C",
+        model="ft:gpt-3.5-turbo-0613:markortega::8F210Mci",
         messages=conversation
     )
 
@@ -52,7 +52,7 @@ def special_query():
 
 
     special_response = openai.ChatCompletion.create(
-        model="ft:gpt-3.5-turbo-0613:markortega::8F12pY3C",
+        model="ft:gpt-3.5-turbo-0613:markortega::8F210Mci",
         messages=[
             {"role": "system", "content": "Please generate one observation based on a topic recurring in current events"},
             {"role": "user", "content": user_input}

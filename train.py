@@ -2,14 +2,14 @@
 import requests
 import json
 
-api_key = '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'  # Replace with your new API key
+api_key = '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'  # Replace with your new API key
 headers = {
     "Content-Type": "application/json",
     "Authorization": f"Bearer {api_key}"
 }
 
 data = {
-    "training_file": "file-wZ1U87ChjTxeiWlpip77W5eS",
+    "training_file": "file-DkXjIa1H1JKBusFpbtM4oOis",
     "model": "gpt-3.5-turbo"  # Modify this as per the model you are using
 }
 
