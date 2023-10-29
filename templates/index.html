@@ -3,26 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat with Arachne</title>
+    <title>Zeitgeist Trends Analysis</title>
     <style>
         html, body {
-            height: 100%; /* Full height */
+            height: 100%;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            position: relative; /* Added for absolute positioning of the image */
-        }
-
-        #top-right-image {
-            position: absolute;
-            top: 80px; /* Adjust as needed */
-            right: 5%; /* Adjust as needed */
-            width: 310px; /* Adjust as per your requirement */
-            height: 310px;
-            border: 0;
         }
 
         h1 {
@@ -30,18 +20,32 @@
             margin-left: 20px;
         }
 
-        #chat-container {
-            flex-grow: 1;
-            width: 50%;
-            overflow-y: auto;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin-bottom: 0;
+        .main-content {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            width: 100%;
         }
 
-        .right-content {
-            width: 50%;
+        #chat-container {
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: 52%;
+            overflow-y: auto;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            padding: 20px;
+            margin-left: 10px;
+            border-radius: 2%;
+        }
+
+        #top-right-image {
+            flex-grow: 1;
+            flex-shrink: 1;
+            max-width: 310px;
+            height: auto;
+            align-self: center;
+            margin: 0 auto;
         }
 
         .chat-message {
@@ -61,10 +65,11 @@
         }
 
         #user-input {
-            width: calc(100% - 220px);
-            padding: 10px;
+            width: 52%;
+            margin-left: 10px;
             float: left;
             box-sizing: border-box;
+            border: 2px solid black;
         }
 
         #send-button, #clear-button {
@@ -90,17 +95,33 @@
         form {
             margin: 0;
         }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            #chat-container, #top-right-image {
+                flex-basis: auto;
+                width: 100%;
+                max-width: none;
+            }
+
+            #user-input {
+                width: 100%;
+                float: none;
+                margin: 0 auto;
+            }
+        }
     </style>
 </head>
 <body>
-    <img src="https://i.pinimg.com/564x/bc/9b/bc/bc9bbc8167d4e4fefa2acd13241575fd.jpg" id="top-right-image" alt="Descriptive Image Text">
-    <h1>Trends Bot</h1>
-    <div id="chat-container">
-        {% for line in conversation %}
-            <div class="chat-message {% if 'You:' in line %}user-message{% else %}bot-message{% endif %}">
-                {{ line }}
-            </div>
-        {% endfor %}
+    <h1>Zeitgeist Trends Analysis</h1>
+    <div class="main-content">
+        <div id="chat-container">
+            <!-- Chat messages will be loaded here -->
+        </div>
+        <img src="https://i.pinimg.com/564x/bc/9b/bc/bc9bbc8167d4e4fefa2acd13241575fd.jpg" id="top-right-image" alt="Descriptive Image Text">
     </div>
     <div class="clearfix">
         <form action="/get_response" method="post" style="margin: 0;">
